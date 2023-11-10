@@ -1,28 +1,6 @@
+import deepFreeze from '../utils/deepFreeze.js';
 import { DATE } from './Calendar.js';
 import { UNIT } from './Symbol.js';
-
-export const EVENT_DISCOUNT_INFORMATION = Object.freeze({
-  basic: Object.freeze({
-    name: '크리스마스 디데이 할인',
-    price: 1_000,
-  }),
-  special: Object.freeze({
-    name: '특별 할인',
-    price: 1_000,
-  }),
-  weekday: Object.freeze({
-    name: '평일 할인',
-    price: 2_023,
-  }),
-  weekend: Object.freeze({
-    name: '주말 할인',
-    price: 2_023,
-  }),
-  champagne: Object.freeze({
-    name: '증정 이벤트',
-    price: 25_000,
-  }),
-});
 
 export const EVENT_INPUT_NOTIFICATION_MESSAGE = Object.freeze({
   enterVisitDay: `${DATE.month}중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해주세요!)\n`,
@@ -41,7 +19,7 @@ export const EVENT_OUTPUT_NOTIFICATION_MESSAGE = Object.freeze({
   eventBadge: `<${DATE.month}월 이벤트 배지>`,
 });
 
-export const EVENT_OUTPUT_NOTIFICATION_FORMAT = Object.freeze({
+export const EVENT_OUTPUT_NOTIFICATION_FORMAT = deepFreeze({
   visitDay(day) {
     return `${DATE.month}월 ${day}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!`;
   },
