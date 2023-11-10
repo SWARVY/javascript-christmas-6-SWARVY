@@ -1,4 +1,4 @@
-import DATE from './Calendar.js';
+import { DATE } from './Calendar.js';
 import { UNIT } from './Symbol.js';
 
 export const EVENT_DISCOUNT_INFORMATION = Object.freeze({
