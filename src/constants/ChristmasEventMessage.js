@@ -31,7 +31,7 @@ export const EVENT_INPUT_NOTIFICATION_MESSAGE = Object.freeze({
 });
 
 export const EVENT_OUTPUT_NOTIFICATION_MESSAGE = Object.freeze({
-  welcome: `안녕하세요! 우테코 식당 ${DATE.month} 이벤트 플래너입니다.`,
+  welcome: `안녕하세요! 우테코 식당 ${DATE.month}월 이벤트 플래너입니다.`,
   order: '<주문 메뉴>',
   totalPriceBeforeEvent: '<할인 전 총주문 금액>',
   eventItem: '<증정 메뉴>',
