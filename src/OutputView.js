@@ -5,7 +5,7 @@ import {
 } from './constants/ChristmasEventMessage.js';
 import { PRESENT_EVENT } from './constants/ChristmasEventOption.js';
 
-const OutputView = {
+const OutputView = Object.freeze({
   print: (message) => Console.print(message),
 
   printWelcome: () => {
@@ -53,6 +53,6 @@ const OutputView = {
     OutputView.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.eventBadge);
     OutputView.print(badge);
   },
-};
+});
 
 export default OutputView;

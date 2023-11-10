@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { EVENT_INPUT_NOTIFICATION_MESSAGE } from './constants/ChristmasEventMessage.js';
 
-const InputView = {
+const InputView = Object.freeze({
   readLine: (message) => Console.readLineAsync(message),
 
   readVisitDay: () =>
@@ -9,6 +9,6 @@ const InputView = {
 
   readOrder: () =>
     InputView.readLine(EVENT_INPUT_NOTIFICATION_MESSAGE.enterOrder),
-};
+});
 
 export default InputView;
