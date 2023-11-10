@@ -25,9 +25,9 @@ export const EVENT_DISCOUNT_INFORMATION = Object.freeze({
 });
 
 export const EVENT_INPUT_NOTIFICATION_MESSAGE = Object.freeze({
-  enterVisitDay: `${DATE.month}중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해주세요!)`,
+  enterVisitDay: `${DATE.month}중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해주세요!)\n`,
   enterOrder:
-    '주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)',
+    '주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)\n',
 });
 
 export const EVENT_OUTPUT_NOTIFICATION_MESSAGE = Object.freeze({
