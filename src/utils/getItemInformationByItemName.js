@@ -8,7 +8,11 @@ const getItemInformationByItemName = (targetItemName) => {
   let itemInformation;
 
   DISH_CATEGORY.forEach((category) => {
-    itemInformation = category.filter((item) => item.name === targetItemName);
+    const find = category.find((item) => item.name === targetItemName);
+
+    if (find) {
+      itemInformation = find;
+    }
   });
 
   return itemInformation;
