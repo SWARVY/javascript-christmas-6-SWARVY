@@ -1,15 +1,10 @@
-const deepFreeze = (object) => {
-  const propNames = Object.getOwnPropertyNames(object);
-  const copyObject = { ...object };
+const deepFreeze = (target) => {
+  if (target && typeof target === 'object' && !Object.isFrozen(target)) {
+    Object.freeze(target);
+    Object.keys(target).forEach((key) => deepFreeze(target[key]));
+  }
 
-  propNames.forEach((name) => {
-    const value = object[name];
-
-    copyObject[name] =
-      value && typeof value === 'object' ? deepFreeze(value) : value;
-  });
-
-  return Object.freeze(copyObject);
+  return target;
 };
 
 export default deepFreeze;
