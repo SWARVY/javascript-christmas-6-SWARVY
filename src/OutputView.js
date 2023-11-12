@@ -4,54 +4,94 @@ import {
   EVENT_OUTPUT_NOTIFICATION_MESSAGE,
 } from './constants/ChristmasEventMessage.js';
 import { PRESENT_EVENT } from './constants/ChristmasEventOption.js';
+import { NONE } from './constants/Symbol.js';
 
 const OutputView = Object.freeze({
   print: (message) => Console.print(message),
 
-  printWelcome: () => {
-    OutputView.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.welcome);
+  printWelcome() {
+    this.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.welcome);
   },
 
-  printOrderMenu: (menuList) => {
-    OutputView.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.order);
-    menuList.forEach((menu) =>
-      OutputView.print(EVENT_OUTPUT_NOTIFICATION_FORMAT.orderMenu(menu))
-    );
+  printError(message) {
+    this.print(message);
   },
 
-  printTotalPriceBeforeEvent: (total) => {
-    OutputView.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.totalPriceBeforeEvent);
-    OutputView.print(EVENT_OUTPUT_NOTIFICATION_FORMAT.normalPrice(total));
+  printVisitDay(day) {
+    this.print(EVENT_OUTPUT_NOTIFICATION_FORMAT.visitDay(day));
   },
 
-  printEventItem: () => {
-    OutputView.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.eventItem);
-    OutputView.print(
-      EVENT_OUTPUT_NOTIFICATION_FORMAT.itemAmount(
-        PRESENT_EVENT.name,
-        PRESENT_EVENT.amount
+  printOrderMenu(orderList) {
+    this.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.order);
+    orderList.forEach(({ orderItemName, orderItemAmount }) =>
+      this.print(
+        EVENT_OUTPUT_NOTIFICATION_FORMAT.orderMenu(
+          orderItemName,
+          orderItemAmount
+        )
       )
     );
   },
 
-  printAppliedEventList: (appliedEventList) => {
-    OutputView.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.appliedEventList);
-    // 추후 객체 설계에 따라 작성
+  printTotalPriceBeforeEvent(total) {
+    this.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.totalPriceBeforeEvent);
+    this.print(EVENT_OUTPUT_NOTIFICATION_FORMAT.normalPrice(total));
   },
 
-  printTotalDiscount: (total) => {
-    OutputView.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.totalEventDiscount);
-    OutputView.print(EVENT_OUTPUT_NOTIFICATION_FORMAT.discountPrice(total));
+  printPresent(present) {
+    this.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.present);
+    this.checkNone(present, () => {
+      this.print(
+        EVENT_OUTPUT_NOTIFICATION_FORMAT.itemAmount(
+          PRESENT_EVENT.itemName,
+          PRESENT_EVENT.itemAmount
+        )
+      );
+    });
   },
 
-  printTotalPriceAfterEvent: (total) => {
-    OutputView.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.totalPriceAfterEvent);
-    OutputView.print(EVENT_OUTPUT_NOTIFICATION_FORMAT.discountPrice(total));
+  printAppliedEventList(eventList) {
+    this.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.appliedEventList);
+    this.checkNone(eventList.length, () => {
+      eventList.forEach(({ eventName, discountPrice }) => {
+        this.print(
+          EVENT_OUTPUT_NOTIFICATION_FORMAT.appliedEvent(
+            eventName,
+            discountPrice
+          )
+        );
+      });
+    });
   },
 
-  printEventBadge: (badge) => {
-    OutputView.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.eventBadge);
-    OutputView.print(badge);
+  printTotalDiscount(total) {
+    this.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.totalEventDiscount);
+
+    if (total > 0) {
+      this.print(EVENT_OUTPUT_NOTIFICATION_FORMAT.discountPrice(total));
+    } else {
+      this.print(EVENT_OUTPUT_NOTIFICATION_FORMAT.normalPrice(total));
+    }
+  },
+
+  printTotalPriceAfterEvent(total) {
+    this.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.totalPriceAfterEvent);
+    this.print(EVENT_OUTPUT_NOTIFICATION_FORMAT.normalPrice(total));
+  },
+
+  printEventBadge(badge) {
+    this.print(EVENT_OUTPUT_NOTIFICATION_MESSAGE.eventBadge);
+    this.checkNone(badge, () => {
+      this.print(badge.name);
+    });
+  },
+
+  checkNone(checkValue, action) {
+    if (!checkValue) {
+      return this.print(NONE);
+    }
+
+    return action();
   },
 });
 
