@@ -7,11 +7,11 @@ export const EVENT_OPTION = Object.freeze({
   maximumOrderAmount: 20,
 });
 
-export const EVENT_BADGE_PRICE = Object.freeze({
-  santa: 20_000,
-  tree: 10_000,
-  start: 5_000,
-});
+export const EVENT_BADGE = Object.freeze([
+  { name: '산타', require: 20_000 },
+  { name: '트리', require: 10_000 },
+  { name: '스타', require: 5_000 },
+]);
 
 export const PRESENT_EVENT = Object.freeze({
   minimumOrderPrice: 120_000,
