@@ -1,7 +1,9 @@
 import deepFreeze from '../utils/deepFreeze.js';
+import getItemInformationByItemName from '../utils/getItemInformationByItemName.js';
+import { PRESENT_EVENT } from './ChristmasEventOption.js';
 
 export const EVENT_INFORMATION = deepFreeze({
-  basic: {
+  dDay: {
     name: '크리스마스 디데이 할인',
     price: 1_000,
     startDay: 1,
@@ -25,12 +27,19 @@ export const EVENT_INFORMATION = deepFreeze({
     startDay: 1,
     endDay: 31,
   },
-  champagne: {
+  present: {
     name: '증정 이벤트',
-    price: 25_000,
+    price: getItemInformationByItemName(PRESENT_EVENT.itemName).price,
     startDay: 1,
     endDay: 31,
   },
 });
 
+/**
+ * @type {{ name: string, price: number, startDay: number, endDay: Number }[]}
+ */
 export const EVENT_LIST = Object.values(EVENT_INFORMATION);
+
+export const DISCOUNT_EVENT_EXCEPTION_LIST = Object.freeze([
+  EVENT_INFORMATION.present.name,
+]);
