@@ -8,25 +8,28 @@ import DecemberEvent from './DecemberEvent.js';
 
 export default class MonthlyEvent {
   /**
-   * @type {number}
+   * @type {number} - 방문 날짜
    */
   #day;
 
+  /**
+   * @private
+   * @type {{decemberEvent: DecemberEvent}} - 적용중인 이벤트 목록
+   */
   #events = {
     decemberEvent: DecemberEvent.of(),
   };
 
   /**
    * @static
-   * @param {number} day
-   * @returns {MonthlyEvent}
+   * @returns {MonthlyEvent} MonthlyEvent 인스턴스
    */
   static of() {
     return new MonthlyEvent();
   }
 
   /**
-   * @param {number} day
+   * @param {number} day - 방문 날짜
    */
   validate(day) {
     VisitDayValidator.validateVisitDay(day);
@@ -34,9 +37,9 @@ export default class MonthlyEvent {
   }
 
   /**
-   * @param {{ orderItemName: string, orderItemAmount: number }[]} orderList
-   * @param {number} orderTotal
-   * @returns {{ eventList: { eventName: string, discountPrice: number }[], totalEventDiscount: number }}
+   * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
+   * @param {number} orderTotal - 주문 합계 금액
+   * @returns {import('../utils/JSDocs.js').appliedEvent} 적용된 이벤트 목록과 총 할인금액
    */
   apply(orderList, orderTotal) {
     const eventList = this.#events.decemberEvent.apply(
@@ -55,14 +58,18 @@ export default class MonthlyEvent {
   }
 
   /**
-   * @param {{ eventName: string, discountPrice: number }[]} eventList
-   * @returns {number}
+   * @param {import('../utils/JSDocs.js').eventList} eventList - 적용된 이벤트 목록
+   * @returns {number} 총 할인 금액
    */
   // eslint-disable-next-line class-methods-use-this
   #calculate(eventList) {
     return eventList.reduce((acc, { discountPrice }) => acc + discountPrice, 0);
   }
 
+  /**
+   * @param {import('../utils/JSDocs.js').eventList} eventList - 적용된 이벤트 목록
+   * @returns {boolean} 선물 증정 여부
+   */
   // eslint-disable-next-line class-methods-use-this
   #present(eventList) {
     return eventList.some(
@@ -70,6 +77,11 @@ export default class MonthlyEvent {
     );
   }
 
+  /**
+   * @param {import('../utils/JSDocs.js').eventList} eventList - 적용된 이벤트 목록
+   * @param {number} orderTotal - 주문 금액 합계
+   * @returns {number} 이벤트 적용 후 지불 예정 금액
+   */
   // eslint-disable-next-line class-methods-use-this
   payResult(eventList, orderTotal) {
     const discountTotal = eventList.reduce(
@@ -86,12 +98,16 @@ export default class MonthlyEvent {
     return orderTotal - discountTotal;
   }
 
+  /**
+   * @param {number} totalEventDiscount - 총 할인 금액
+   * @returns {string | number} 이벤트 뱃지
+   */
   // eslint-disable-next-line class-methods-use-this
   badge(totalEventDiscount) {
     const find = EVENT_BADGE.find(
       (badge) => badge.require < totalEventDiscount
     );
 
-    return find || 0;
+    return find.name || 0;
   }
 }
