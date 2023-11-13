@@ -1,6 +1,7 @@
 import { WEEK } from '../constants/Calendar.js';
 import {
   D_DAY_EVENT_DISCOUNT_PER_DAY,
+  EVENT_OPTION,
   PRESENT_EVENT,
   SPECIAL_EVENT_DAY,
 } from '../constants/ChristmasEventOption.js';
@@ -9,12 +10,32 @@ import { DESSERT, MAIN_DISH } from '../constants/Dish.js';
 import getItemKindByItemName from '../utils/getItemKindByOrderList.js';
 import isWeekend from '../utils/isWeekend.js';
 
-const DecemberEvent = Object.freeze({
-  eventStatus: [],
+export default class DecemberEvent {
+  #eventStatus = [];
 
-  applyEvent(eventName, discountPrice) {
-    this.eventStatus.push({ eventName, discountPrice });
-  },
+  static of() {
+    return new DecemberEvent();
+  }
+
+  /**
+   * @param {number} day
+   * @param {{ orderItemName: string, orderItemAmount: number }[]} orderList
+   * @param {number} orderTotal
+   * @returns {{ eventName: string, discountPrice: number }[]}
+   */
+  apply(day, orderList, orderTotal) {
+    const check = isWeekend(day);
+
+    if (orderTotal > EVENT_OPTION.eventMinimumOrderPrice) {
+      this.christmasDDayEvent(day);
+      this.weekdayEvent(check, orderList);
+      this.weekendEvent(check, orderList);
+      this.specialEvent(day);
+      this.presentEvent(orderTotal);
+    }
+
+    return this.#eventStatus;
+  }
 
   christmasDDayEvent(day) {
     if (
@@ -26,7 +47,7 @@ const DecemberEvent = Object.freeze({
         EVENT_INFORMATION.dDay.price + D_DAY_EVENT_DISCOUNT_PER_DAY * (day - 1)
       );
     }
-  },
+  }
 
   weekdayEvent(check, orderList) {
     if (check !== WEEK.weekday) {
@@ -41,7 +62,7 @@ const DecemberEvent = Object.freeze({
         EVENT_INFORMATION.weekday.price * selectedAmount
       );
     }
-  },
+  }
 
   weekendEvent(check, orderList) {
     if (check !== WEEK.weekend) {
@@ -56,7 +77,7 @@ const DecemberEvent = Object.freeze({
         EVENT_INFORMATION.weekend.price * selectedAmount
       );
     }
-  },
+  }
 
   specialEvent(day) {
     if (SPECIAL_EVENT_DAY.includes(day)) {
@@ -65,7 +86,7 @@ const DecemberEvent = Object.freeze({
         EVENT_INFORMATION.special.price
       );
     }
-  },
+  }
 
   presentEvent(orderTotal) {
     if (orderTotal >= PRESENT_EVENT.minimumOrderPrice) {
@@ -74,25 +95,9 @@ const DecemberEvent = Object.freeze({
         EVENT_INFORMATION.present.price * PRESENT_EVENT.itemAmount
       );
     }
-  },
+  }
 
-  /**
-   * @param {number} day
-   * @param {{ orderItemName: string, orderItemAmount: number }[]} orderList
-   * @param {number} orderTotal
-   * @returns {{ eventName: string, discountPrice: number }[]}
-   */
-  apply(day, orderList, orderTotal) {
-    const check = isWeekend(day);
-
-    this.christmasDDayEvent(day);
-    this.weekdayEvent(check, orderList);
-    this.weekendEvent(check, orderList);
-    this.specialEvent(day);
-    this.presentEvent(orderTotal);
-
-    return this.eventStatus;
-  },
-});
-
-export default DecemberEvent;
+  applyEvent(eventName, discountPrice) {
+    this.#eventStatus.push({ eventName, discountPrice });
+  }
+}
