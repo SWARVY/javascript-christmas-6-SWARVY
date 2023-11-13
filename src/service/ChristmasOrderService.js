@@ -3,8 +3,14 @@ import OrderSheet from '../domain/OrderSheet.js';
 import deepFreeze from '../utils/deepFreeze.js';
 
 const ChristmasOrderService = deepFreeze({
+  /**
+   * @type {OrderSheet}
+   */
   orderSheet: OrderSheet.of(),
 
+  /**
+   * @param {string} order
+   */
   initialize(order) {
     const parsedOrderList = this.parsingOrderString(order);
 
