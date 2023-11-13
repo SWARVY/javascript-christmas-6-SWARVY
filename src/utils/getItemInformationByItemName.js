@@ -15,7 +15,7 @@ const getItemInformationByItemName = (targetItemName) => {
     }
   });
 
-  return itemInformation;
+  return itemInformation || 0;
 };
 
 export default getItemInformationByItemName;

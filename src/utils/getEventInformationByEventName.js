@@ -7,7 +7,7 @@ import { EVENT_LIST } from '../constants/DecemberEventList.js';
 const getEventInformationByEventName = (targetEventName) => {
   const find = EVENT_LIST.find((event) => event.name === targetEventName);
 
-  return find !== undefined ? find : -1;
+  return find || 0;
 };
 
 export default getEventInformationByEventName;
