@@ -4,12 +4,12 @@ import deepFreeze from '../utils/deepFreeze.js';
 
 const ChristmasOrderService = deepFreeze({
   /**
-   * @type {OrderSheet}
+   * @type {OrderSheet} - OrderSheet 인스턴스
    */
   orderSheet: OrderSheet.of(),
 
   /**
-   * @param {string} order
+   * @param {string} order - 입력받은 주문 입력
    */
   initialize(order) {
     const parsedOrderList = this.parsingOrderString(order);
@@ -18,15 +18,15 @@ const ChristmasOrderService = deepFreeze({
   },
 
   /**
-   * @returns {{ orderList: { orderItemName: string, orderItemAmount: number }[], orderTotal: number }}
+   * @returns {import('../utils/JSDocs.js').orderResult}} 주문 목록 및 금액 합계
    */
   orderMenu() {
     return this.orderSheet.order();
   },
 
   /**
-   * @param {string} order
-   * @returns {{ orderItemName: string, orderItemAmount: number }[]}
+   * @param {string} order - 입력받은 주문 입력
+   * @returns {import('../utils/JSDocs.js').orderList} 주문 목록
    */
   parsingOrderString(order) {
     return order.split(DIVIDER.comma).map((combinedOrder) => {
