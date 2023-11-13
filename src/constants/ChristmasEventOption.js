@@ -3,7 +3,7 @@ export const D_DAY_EVENT_DISCOUNT_PER_DAY = 100;
 export const SPECIAL_EVENT_DAY = Object.freeze([3, 10, 17, 24, 25, 31]);
 
 export const EVENT_OPTION = Object.freeze({
-  minimumOrderPrice: 10_000,
+  eventMinimumOrderPrice: 10_000,
   maximumOrderAmount: 20,
 });
 
