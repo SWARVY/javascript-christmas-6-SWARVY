@@ -108,6 +108,6 @@ export default class MonthlyEvent {
       (badge) => badge.require < totalEventDiscount
     );
 
-    return find.name || 0;
+    return find ? find.name : 0;
   }
 }
