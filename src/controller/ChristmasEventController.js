@@ -17,28 +17,16 @@ export default class ChristmasEventController {
     let visitDayInput;
 
     await this.#handleError(async () => {
-      visitDayInput = await this.#readVisitDayInput();
+      visitDayInput = await InputView.readVisitDay();
       this.#services.christmasEventService.initialize(visitDayInput);
     });
 
     await this.#handleError(async () => {
-      const orderInput = await this.#readOrderInput();
+      const orderInput = await InputView.readOrder();
       this.#services.christmasOrderService.initialize(orderInput);
     });
 
     this.#printOrderSheetBeforeEvent(visitDayInput);
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  async #readVisitDayInput() {
-    const visitDayInput = await InputView.readVisitDay();
-    return visitDayInput;
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  async #readOrderInput() {
-    const orderInput = await InputView.readOrder();
-    return orderInput;
   }
 
   async #handleError(action) {
