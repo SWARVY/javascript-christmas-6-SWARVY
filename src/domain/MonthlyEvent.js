@@ -3,6 +3,7 @@ import {
   DISCOUNT_EVENT_EXCEPTION_LIST,
   EVENT_INFORMATION,
 } from '../constants/DecemberEventList.js';
+import VisitDayValidator from '../validator/VisitDayValidator.js';
 import DecemberEvent from './DecemberEvent.js';
 
 export default class MonthlyEvent {
@@ -12,7 +13,7 @@ export default class MonthlyEvent {
   #day;
 
   #events = {
-    decemberEvent: DecemberEvent,
+    decemberEvent: DecemberEvent.of(),
   };
 
   /**
@@ -28,7 +29,7 @@ export default class MonthlyEvent {
    * @param {number} day
    */
   validate(day) {
-    // validation 진행
+    VisitDayValidator.validateVisitDay(day);
     this.#day = day;
   }
 
@@ -43,6 +44,7 @@ export default class MonthlyEvent {
       orderList,
       orderTotal
     );
+
     const present = this.#present(eventList);
 
     return {
