@@ -11,17 +11,25 @@ import getItemKindByItemName from '../utils/getItemKindByOrderList.js';
 import isWeekend from '../utils/isWeekend.js';
 
 export default class DecemberEvent {
+  /**
+   * @private
+   * @type {import('../utils/JSDocs.js').eventList | never[]}
+   */
   #eventStatus = [];
 
+  /**
+   * @static
+   * @returns {DecemberEvent} DecemberEvent 인스턴스
+   */
   static of() {
     return new DecemberEvent();
   }
 
   /**
-   * @param {number} day
-   * @param {{ orderItemName: string, orderItemAmount: number }[]} orderList
-   * @param {number} orderTotal
-   * @returns {{ eventName: string, discountPrice: number }[]}
+   * @param {number} day - 방문 날짜
+   * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
+   * @param {number} orderTotal - 주문 금액 합계
+   * @returns {import('../utils/JSDocs.js').eventList | never[]} eventList - 이벤트 목록
    */
   apply(day, orderList, orderTotal) {
     const check = isWeekend(day);
@@ -32,11 +40,16 @@ export default class DecemberEvent {
       this.weekendEvent(check, orderList);
       this.specialEvent(day);
       this.presentEvent(orderTotal);
+
+      return this.#eventStatus;
     }
 
-    return this.#eventStatus;
+    return [];
   }
 
+  /**
+   * @param {number} day - 방문 날짜
+   */
   christmasDDayEvent(day) {
     if (
       day <= EVENT_INFORMATION.dDay.endDay &&
@@ -49,6 +62,10 @@ export default class DecemberEvent {
     }
   }
 
+  /**
+   * @param {import('../utils/JSDocs.js').check} check - 평일/주말 여부
+   * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
+   */
   weekdayEvent(check, orderList) {
     if (check !== WEEK.weekday) {
       return;
@@ -64,6 +81,11 @@ export default class DecemberEvent {
     }
   }
 
+  /**
+   *
+   * @param {import('../utils/JSDocs.js').check} check - 평일/주말 여부
+   * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
+   */
   weekendEvent(check, orderList) {
     if (check !== WEEK.weekend) {
       return;
@@ -79,6 +101,9 @@ export default class DecemberEvent {
     }
   }
 
+  /**
+   * @param {number} day - 방문 날짜
+   */
   specialEvent(day) {
     if (SPECIAL_EVENT_DAY.includes(day)) {
       this.applyEvent(
@@ -88,6 +113,9 @@ export default class DecemberEvent {
     }
   }
 
+  /**
+   * @param {number} orderTotal - 주문 금액 합계
+   */
   presentEvent(orderTotal) {
     if (orderTotal >= PRESENT_EVENT.minimumOrderPrice) {
       this.applyEvent(
@@ -97,6 +125,10 @@ export default class DecemberEvent {
     }
   }
 
+  /**
+   * @param {string} eventName - 적용할 이벤트 이름
+   * @param {number} discountPrice - 이벤트로 할인된 가격
+   */
   applyEvent(eventName, discountPrice) {
     this.#eventStatus.push({ eventName, discountPrice });
   }
