@@ -3,21 +3,20 @@ import OrderValidator from '../validator/OrderValidator.js';
 
 export default class OrderSheet {
   /**
-   * @type {{ orderItemName: string, orderItemAmount: number }[]}
+   * @type {import('../utils/JSDocs.js').orderList}
    */
   #orderList;
 
   /**
    * @static
-   * @param {{ orderItemName: string, orderItemAmount: number }[]} orderList
-   * @returns {OrderSheet}
+   * @returns {OrderSheet} OrderSheet 인스턴스
    */
   static of() {
     return new OrderSheet();
   }
 
   /**
-   * @param {{ orderItemName: string, orderItemAmount: number }[]} OrderList
+   * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
    */
   validate(orderList) {
     OrderValidator.validateOrder(orderList);
@@ -25,14 +24,14 @@ export default class OrderSheet {
   }
 
   /**
-   * @returns {{ orderList: { orderItemName: string, orderItemAmount: number }[], orderTotal: number }}
+   * @returns {import('../utils/JSDocs.js').orderResult} 주문 목록 및 금액 합계
    */
   order() {
     return { orderList: this.#orderList, orderTotal: this.#calculate() };
   }
 
   /**
-   * @returns {number}
+   * @returns {number} 증정 행사를 제외한 할인된 가격의 총합
    */
   #calculate() {
     return this.#orderList.reduce(
