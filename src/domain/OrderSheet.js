@@ -1,4 +1,5 @@
 import getItemInformationByItemName from '../utils/getItemInformationByItemName.js';
+import OrderValidator from '../validator/OrderValidator.js';
 
 export default class OrderSheet {
   /**
@@ -19,7 +20,7 @@ export default class OrderSheet {
    * @param {{ orderItemName: string, orderItemAmount: number }[]} OrderList
    */
   validate(orderList) {
-    // validation 진행
+    OrderValidator.validateOrder(orderList);
     this.#orderList = orderList;
   }
 
