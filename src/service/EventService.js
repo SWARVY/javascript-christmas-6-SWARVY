@@ -2,7 +2,7 @@ import MonthlyEvent from '../domain/MonthlyEvent.js';
 import deepFreeze from '../utils/deepFreeze.js';
 
 // 날짜, 총 주문 금액, 주문 리스트
-const ChristmasEventService = deepFreeze({
+const EventService = deepFreeze({
   /**
    * @type {MonthlyEvent} - MonthlyEvent 인스턴스
    */
@@ -38,4 +38,4 @@ const ChristmasEventService = deepFreeze({
   },
 });
 
-export default ChristmasEventService;
+export default EventService;

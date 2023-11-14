@@ -2,7 +2,7 @@ import { DIVIDER } from '../constants/Symbol.js';
 import OrderSheet from '../domain/OrderSheet.js';
 import deepFreeze from '../utils/deepFreeze.js';
 
-const ChristmasOrderService = deepFreeze({
+const OrderService = deepFreeze({
   /**
    * @type {OrderSheet} - OrderSheet 인스턴스
    */
@@ -39,4 +39,4 @@ const ChristmasOrderService = deepFreeze({
   },
 });
 
-export default ChristmasOrderService;
+export default OrderService;
