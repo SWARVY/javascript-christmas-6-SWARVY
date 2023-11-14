@@ -20,6 +20,7 @@ export default class DecemberEvent {
   }
 
   /**
+   * @public
    * @param {number} day - 방문 날짜
    * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
    * @param {number} orderTotal - 주문 금액 합계
@@ -42,6 +43,7 @@ export default class DecemberEvent {
   }
 
   /**
+   * @public
    * @param {import('../utils/JSDocs.js').eventList} eventStatus - 이벤트 저장 배열
    * @param {number} day - 방문 날짜
    */
@@ -59,6 +61,7 @@ export default class DecemberEvent {
   }
 
   /**
+   * @public
    * @param {import('../utils/JSDocs.js').eventList} eventStatus - 이벤트 저장 배열
    * @param {import('../utils/JSDocs.js').check} check - 평일/주말 여부
    * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
@@ -80,7 +83,7 @@ export default class DecemberEvent {
   }
 
   /**
-   *
+   * @public
    * @param {import('../utils/JSDocs.js').eventList} eventStatus - 이벤트 저장 배열
    * @param {import('../utils/JSDocs.js').check} check - 평일/주말 여부
    * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
@@ -102,6 +105,7 @@ export default class DecemberEvent {
   }
 
   /**
+   * @public
    * @param {import('../utils/JSDocs.js').eventList} eventStatus - 이벤트 저장 배열
    * @param {number} day - 방문 날짜
    */
@@ -116,6 +120,7 @@ export default class DecemberEvent {
   }
 
   /**
+   * @public
    * @param {import('../utils/JSDocs.js').eventList} eventStatus - 이벤트 저장 배열
    * @param {number} orderTotal - 주문 금액 합계
    */
@@ -130,6 +135,7 @@ export default class DecemberEvent {
   }
 
   /**
+   * @public
    * @param {import('../utils/JSDocs.js').eventList} eventStatus - 이벤트 저장 배열
    * @param {string} eventName - 적용할 이벤트 이름
    * @param {number} discountPrice - 이벤트로 할인된 가격

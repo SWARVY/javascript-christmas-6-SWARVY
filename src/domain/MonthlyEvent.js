@@ -8,6 +8,7 @@ import DecemberEvent from './DecemberEvent.js';
 
 export default class MonthlyEvent {
   /**
+   * @private
    * @type {number} - 방문 날짜
    */
   #day;
@@ -29,6 +30,7 @@ export default class MonthlyEvent {
   }
 
   /**
+   * @public
    * @param {number} day - 방문 날짜
    */
   validate(day) {
@@ -37,6 +39,7 @@ export default class MonthlyEvent {
   }
 
   /**
+   * @public
    * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
    * @param {number} orderTotal - 주문 합계 금액
    * @returns {import('../utils/JSDocs.js').appliedEvent} 적용된 이벤트 목록과 총 할인금액
@@ -67,6 +70,7 @@ export default class MonthlyEvent {
   }
 
   /**
+   * @private
    * @param {import('../utils/JSDocs.js').eventList} eventList - 적용된 이벤트 목록
    * @returns {boolean} 선물 증정 여부
    */
@@ -78,6 +82,7 @@ export default class MonthlyEvent {
   }
 
   /**
+   * @public
    * @param {import('../utils/JSDocs.js').eventList} eventList - 적용된 이벤트 목록
    * @param {number} orderTotal - 주문 금액 합계
    * @returns {number} 이벤트 적용 후 지불 예정 금액
@@ -99,8 +104,9 @@ export default class MonthlyEvent {
   }
 
   /**
+   * @public
    * @param {number} totalEventDiscount - 총 할인 금액
-   * @returns {string | number} 이벤트 뱃지
+   * @returns {string | 0} 이벤트 뱃지
    */
   // eslint-disable-next-line class-methods-use-this
   badge(totalEventDiscount) {

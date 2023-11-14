@@ -3,6 +3,7 @@ import OrderValidator from '../validator/OrderValidator.js';
 
 export default class OrderSheet {
   /**
+   * @private
    * @type {import('../utils/JSDocs.js').orderList}
    */
   #orderList;
@@ -16,6 +17,7 @@ export default class OrderSheet {
   }
 
   /**
+   * @public
    * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
    */
   validate(orderList) {
@@ -24,6 +26,7 @@ export default class OrderSheet {
   }
 
   /**
+   * @public
    * @returns {import('../utils/JSDocs.js').orderResult} 주문 목록 및 금액 합계
    */
   order() {
@@ -31,6 +34,7 @@ export default class OrderSheet {
   }
 
   /**
+   * @private
    * @returns {number} 증정 행사를 제외한 할인된 가격의 총합
    */
   #calculate() {
