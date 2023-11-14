@@ -10,7 +10,7 @@ export const EVENT_OPTION = Object.freeze({
 export const EVENT_BADGE = Object.freeze([
   { name: '산타', require: 20_000 },
   { name: '트리', require: 10_000 },
-  { name: '스타', require: 5_000 },
+  { name: '별', require: 5_000 },
 ]);
 
 export const PRESENT_EVENT = Object.freeze({
