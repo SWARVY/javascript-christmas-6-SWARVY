@@ -1,13 +1,13 @@
-import ChristmasEventController from './controller/ChristmasEventController.js';
+import EventController from './controller/EventController.js';
 
 export default class App {
-  #christmasEventController;
+  #eventController;
 
   constructor() {
-    this.#christmasEventController = new ChristmasEventController();
+    this.#eventController = new EventController();
   }
 
   async run() {
-    await this.#christmasEventController.start();
+    await this.#eventController.start();
   }
 }

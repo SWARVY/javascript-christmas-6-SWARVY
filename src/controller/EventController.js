@@ -3,7 +3,7 @@ import OutputView from '../OutputView.js';
 import EventService from '../service/EventService.js';
 import OrderService from '../service/OrderService.js';
 
-export default class ChristmasEventController {
+export default class EventController {
   /**
    * @private
    */
