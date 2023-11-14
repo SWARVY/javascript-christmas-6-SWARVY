@@ -16,7 +16,6 @@ const OrderValidator = deepFreeze({
       const itemInformation = getItemInformationByItemName(item.orderItemName);
 
       if (!itemInformation) {
-        console.log(1);
         throw new ValidationError(EVENT_ERROR_MESSAGE.invalidOrder);
       }
     });
