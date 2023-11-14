@@ -4,7 +4,6 @@ import { DESSERT } from '../constants/Dish.js';
 import ValidationError from '../error/ValidationError.js';
 import deepFreeze from '../utils/deepFreeze.js';
 import getItemInformationByItemName from '../utils/getItemInformationByItemName.js';
-import CommonValidator from './CommonValidator.js';
 
 const OrderValidator = deepFreeze({
   /**
@@ -87,8 +86,6 @@ const OrderValidator = deepFreeze({
    * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
    */
   validateOrder(orderList) {
-    CommonValidator.validateCommon(orderList);
-
     this.checkValidOrderMenu(orderList);
     this.checkValidOrderAmount(orderList);
     this.checkOrderAmountExceed(orderList);
