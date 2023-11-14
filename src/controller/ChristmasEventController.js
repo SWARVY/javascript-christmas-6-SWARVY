@@ -1,15 +1,15 @@
 import InputView from '../InputView.js';
 import OutputView from '../OutputView.js';
-import ChristmasEventService from '../service/ChristmasEventService.js';
-import ChristmasOrderService from '../service/ChristmasOrderService.js';
+import EventService from '../service/EventService.js';
+import OrderService from '../service/OrderService.js';
 
 export default class ChristmasEventController {
   /**
    * @private
    */
   #services = {
-    christmasOrderService: ChristmasOrderService,
-    christmasEventService: ChristmasEventService,
+    orderService: OrderService,
+    eventService: EventService,
   };
 
   constructor() {
@@ -25,12 +25,12 @@ export default class ChristmasEventController {
 
     await this.#handleError(async () => {
       visitDayInput = await InputView.readVisitDay();
-      this.#services.christmasEventService.initialize(visitDayInput);
+      this.#services.eventService.initialize(visitDayInput);
     });
 
     await this.#handleError(async () => {
       const orderInput = await InputView.readOrder();
-      this.#services.christmasOrderService.initialize(orderInput);
+      this.#services.orderService.initialize(orderInput);
     });
 
     this.#printOrderSheetBeforeEvent(visitDayInput);
@@ -55,8 +55,7 @@ export default class ChristmasEventController {
    * @param {string} visitDayInput - 입력된 방문 날짜
    */
   #printOrderSheetBeforeEvent(visitDayInput) {
-    const { orderList, orderTotal } =
-      this.#services.christmasOrderService.orderMenu();
+    const { orderList, orderTotal } = this.#services.orderService.orderMenu();
 
     OutputView.printVisitDay(visitDayInput);
     OutputView.printOrderMenu(orderList);
@@ -72,7 +71,7 @@ export default class ChristmasEventController {
    */
   #printOrderSheetAfterEvent(orderList, orderTotal) {
     const { eventList, totalEventDiscount, present } =
-      this.#services.christmasEventService.applyEvents(orderList, orderTotal);
+      this.#services.eventService.applyEvents(orderList, orderTotal);
 
     OutputView.printPresent(present);
     OutputView.printAppliedEventList(eventList);
@@ -88,12 +87,11 @@ export default class ChristmasEventController {
    * @param {number} totalEventDiscount - 적용된 이벤트 할인 금액 합계
    */
   #printFinalResults(eventList, orderTotal, totalEventDiscount) {
-    const { payTotal, badge } =
-      this.#services.christmasEventService.totalResults(
-        eventList,
-        orderTotal,
-        totalEventDiscount
-      );
+    const { payTotal, badge } = this.#services.eventService.totalResults(
+      eventList,
+      orderTotal,
+      totalEventDiscount
+    );
 
     OutputView.printTotalPriceAfterEvent(payTotal);
     OutputView.printEventBadge(badge);
