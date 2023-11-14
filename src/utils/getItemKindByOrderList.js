@@ -3,7 +3,7 @@
  * @param {import('../utils/JSDocs.js').category} category - 선택된 카테고리
  * @returns {number} 선택된 카테고리에 해당하는 메뉴 개수
  */
-const getItemKindByItemName = (orderList, category) =>
+const getItemKindByOrderList = (orderList, category) =>
   orderList.reduce((acc, { orderItemName, orderItemAmount }) => {
     const find = category.find((item) => item.name === orderItemName);
 
@@ -13,4 +13,4 @@ const getItemKindByItemName = (orderList, category) =>
     return acc;
   }, 0);
 
-export default getItemKindByItemName;
+export default getItemKindByOrderList;

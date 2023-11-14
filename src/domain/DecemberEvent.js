@@ -7,7 +7,7 @@ import {
 } from '../constants/ChristmasEventOption.js';
 import { EVENT_INFORMATION } from '../constants/DecemberEventList.js';
 import { DESSERT, MAIN_DISH } from '../constants/Dish.js';
-import getItemKindByItemName from '../utils/getItemKindByOrderList.js';
+import getItemKindByOrderList from '../utils/getItemKindByOrderList.js';
 import isWeekend from '../utils/isWeekend.js';
 
 export default class DecemberEvent {
@@ -68,7 +68,7 @@ export default class DecemberEvent {
       return;
     }
 
-    const selectedAmount = getItemKindByItemName(orderList, DESSERT);
+    const selectedAmount = getItemKindByOrderList(orderList, DESSERT);
 
     if (selectedAmount > 0) {
       this.applyEvent(
@@ -90,7 +90,7 @@ export default class DecemberEvent {
       return;
     }
 
-    const selectedAmount = getItemKindByItemName(orderList, MAIN_DISH);
+    const selectedAmount = getItemKindByOrderList(orderList, MAIN_DISH);
 
     if (selectedAmount > 0) {
       this.applyEvent(
