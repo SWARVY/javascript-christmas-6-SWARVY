@@ -7,6 +7,10 @@ import getItemInformationByItemName from '../utils/getItemInformationByItemName.
 import CommonValidator from './CommonValidator.js';
 
 const OrderValidator = deepFreeze({
+  /**
+   * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
+   * @throws {ValidationError}
+   */
   checkValidOrderMenu(orderList) {
     orderList.forEach((item) => {
       const itemInformation = getItemInformationByItemName(item.orderItemName);
@@ -18,6 +22,10 @@ const OrderValidator = deepFreeze({
     });
   },
 
+  /**
+   * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
+   * @throws {ValidationError}
+   */
   checkValidOrderAmount(orderList) {
     orderList.forEach(({ orderItemAmount }) => {
       if (Number.isNaN(orderItemAmount)) {
@@ -34,6 +42,10 @@ const OrderValidator = deepFreeze({
     });
   },
 
+  /**
+   * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
+   * @throws {ValidationError}
+   */
   checkOrderAmountExceed(orderList) {
     const totalOrderAmount = orderList.reduce(
       (acc, { orderItemAmount }) => acc + orderItemAmount,
@@ -45,6 +57,10 @@ const OrderValidator = deepFreeze({
     }
   },
 
+  /**
+   * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
+   * @throws {ValidationError}
+   */
   checkOrderMenuDuplication(orderList) {
     const orderMenuList = orderList.map(({ orderItemName }) => orderItemName);
     const orderMenuSet = new Set(orderMenuList);
@@ -54,6 +70,10 @@ const OrderValidator = deepFreeze({
     }
   },
 
+  /**
+   * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
+   * @throws {ValidationError}
+   */
   checkOrderMenuIsOnlyDessert(orderList) {
     const dessertMenuList = orderList.filter(({ orderItemName }) =>
       DESSERT.some((menu) => menu.name === orderItemName)
@@ -65,7 +85,7 @@ const OrderValidator = deepFreeze({
   },
 
   /**
-   * @param {{ orderItemName: string, orderItemAmount: number }[]} orderList
+   * @param {import('../utils/JSDocs.js').orderList} orderList - 주문 목록
    */
   validateOrder(orderList) {
     CommonValidator.validateCommon(orderList);
