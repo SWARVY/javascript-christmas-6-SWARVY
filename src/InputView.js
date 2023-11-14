@@ -4,18 +4,18 @@ import { EVENT_INPUT_NOTIFICATION_MESSAGE } from './constants/ChristmasEventMess
 const InputView = Object.freeze({
   /**
    * @param {string} message - 입력 문구
-   * @returns {string} 입력 데이터
+   * @returns {promise<string>} 입력 데이터
    */
   readLine: (message) => Console.readLineAsync(message),
 
   /**
-   * @returns {string} 입력된 방문 날짜
+   * @returns {promise<string>} 입력된 방문 날짜
    */
   readVisitDay: () =>
     InputView.readLine(EVENT_INPUT_NOTIFICATION_MESSAGE.enterVisitDay),
 
   /**
-   * @returns {string} 입력된 주문 목록
+   * @returns {promise<string>} 입력된 주문 목록
    */
   readOrder: () =>
     InputView.readLine(EVENT_INPUT_NOTIFICATION_MESSAGE.enterOrder),
