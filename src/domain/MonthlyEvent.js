@@ -73,7 +73,7 @@ export default class MonthlyEvent {
   // eslint-disable-next-line class-methods-use-this
   #present(eventList) {
     return eventList.some(
-      ({ eventName }) => eventName === EVENT_INFORMATION.special.name
+      ({ eventName }) => eventName === EVENT_INFORMATION.present.name
     );
   }
 
@@ -105,7 +105,7 @@ export default class MonthlyEvent {
   // eslint-disable-next-line class-methods-use-this
   badge(totalEventDiscount) {
     const find = EVENT_BADGE.find(
-      (badge) => badge.require < totalEventDiscount
+      (badge) => badge.require <= totalEventDiscount
     );
 
     return find ? find.name : 0;
